@@ -2,10 +2,10 @@
 
 set -e
 
-IMAGE_NAME="optscalp"
+IMAGE_NAME="optscalp-frontend"
 TAG="v1.0.0"
 SSH_HOST="${1:-}"
-SERVER_FOLDER="~/projects/optscalp"
+SERVER_FOLDER="~/projects/optscalp/frontend"
 FILENAME=${IMAGE_NAME}_${TAG}.gz
 DOCKER_COMPOSE_FILE="docker-compose.yml"
 DOCKER_COMPOSE_DOWN="docker compose -f $SERVER_FOLDER/$DOCKER_COMPOSE_FILE down"
