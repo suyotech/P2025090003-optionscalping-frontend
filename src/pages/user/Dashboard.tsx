@@ -14,7 +14,7 @@ const DashboardPage: React.FC = () => {
   const [config, setConfig] = useState<IndexConfigItem[]>([]);
   const [strikes, setStrikes] = useState<StrikeItem[]>([]);
   const [positions, setPositions] = useState<PositionItem[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   useEffect(() => {
     loadAll();
