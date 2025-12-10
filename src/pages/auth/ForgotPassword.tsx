@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { sendOtp, resetPassword } from "../../api/userApi";
 import toast from "react-hot-toast";
 import { validEmailAndPassword } from "../../utils/validation";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ const ForgotPassword: React.FC = () => {
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // ---------------- STEP 1 : SEND OTP ----------------
@@ -70,7 +73,6 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center p-6">
-     
       {/* CARD */}
       <div className="w-full max-w-md bg-gray-900/70 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-gray-800">
         <h1 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300 drop-shadow">
@@ -127,29 +129,45 @@ const ForgotPassword: React.FC = () => {
             </div>
 
             {/* New password */}
-            <div>
+            <div className="relative">
               <label className="text-gray-300 mb-1 block">New Password</label>
               <input
-                type="password"
+                type={showNewPassword ? "text" : "password"}
                 className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring focus:ring-blue-700/40 outline-none"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Enter new password"
               />
+              <div
+                className="absolute right-3 top-3 cursor-pointer text-gray-400 hover:text-gray-200"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+              >
+                {showNewPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+              </div>
             </div>
 
             {/* Confirm password */}
-            <div>
+            <div className="relative">
               <label className="text-gray-300 mb-1 block">
                 Confirm Password
               </label>
               <input
-                type="password"
+                type={showConfirmPassword ? "text" : "password"}
                 className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring focus:ring-blue-700/40 outline-none"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Re-enter new password"
               />
+              <div
+                className="absolute right-3 top-3 cursor-pointer text-gray-400 hover:text-gray-200"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <FiEyeOff size={20} />
+                ) : (
+                  <FiEye size={20} />
+                )}
+              </div>
             </div>
 
             {/* Submit */}

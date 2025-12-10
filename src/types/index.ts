@@ -12,13 +12,15 @@ export interface AuthResponse {
 }
 
 export interface IndexConfigItem {
-  name: "NIFTY" | "BANKN" | "SENSEX";
-  tf: number; // Time Frame
+  name: string;
+  tf: number;
   lots: number;
   legs: number;
   dynamicCandle: number;
   fixedCandle: number;
+  fixedCandleEnabled: boolean; 
 }
+
 
 export interface StrikeItem {
   index: "NIFTY" | "BANKN" | "SENSEX";

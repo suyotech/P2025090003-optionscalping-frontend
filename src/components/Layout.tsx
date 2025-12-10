@@ -3,10 +3,9 @@ import Header from "./Header";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-[#0d0f12] text-white">
+    <div className="h-screen bg-[#0d0f12] overflow-hidden text-white">
       <Header />
-      <main className="p-2 pt-16  flex">
-       
+      <main className="p-2 pt-16 overflow-auto flex">
         <Outlet />
       </main>
     </div>

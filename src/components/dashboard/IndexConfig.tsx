@@ -1,11 +1,13 @@
-// src/components/dashboard/IndexConfig.tsx
-
 import React from "react";
 import type { IndexConfigItem } from "../../types/index";
 
 interface IndexConfigProps {
   items: IndexConfigItem[];
-  onChange: (name: string, key: keyof IndexConfigItem, value: number) => void;
+  onChange: (
+    name: string,
+    key: keyof IndexConfigItem,
+    value: number | boolean
+  ) => void;
 }
 
 const IndexConfig: React.FC<IndexConfigProps> = ({ items, onChange }) => {
@@ -27,7 +29,9 @@ const IndexConfig: React.FC<IndexConfigProps> = ({ items, onChange }) => {
               <th className="py-2 px-3 text-center">LOTS</th>
               <th className="py-2 px-3 text-center">LEGS</th>
               <th className="py-2 px-3 text-center">DYNAMIC CANDLE</th>
-              <th className="py-2 px-3 text-center">FIXED CANDLE</th>
+              <th className="py-2 px-3 text-center flex items-center justify-center gap-1">
+                FIXED CANDLE
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -107,14 +111,27 @@ const IndexConfig: React.FC<IndexConfigProps> = ({ items, onChange }) => {
                   </select>
                 </td>
 
-                {/* FIXED CANDLE */}
-                <td className="py-2 px-3 text-center">
+                {/* FIXED CANDLE with Tick */}
+                <td className="py-2 px-3 text-center flex items-center justify-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={item.fixedCandleEnabled}
+                    onChange={(e) =>
+                      onChange(
+                        item.name,
+                        "fixedCandleEnabled",
+                        e.target.checked
+                      )
+                    }
+                    className="w-4 h-4 rounded border-gray-600 accent-blue-500"
+                  />
                   <select
                     value={item.fixedCandle}
                     onChange={(e) =>
                       onChange(item.name, "fixedCandle", Number(e.target.value))
                     }
-                    className="w-24 bg-[#252830] border border-[#3c414d] rounded-md p-1 focus:ring-blue-500 focus:border-blue-500"
+                    disabled={!item.fixedCandleEnabled}
+                    className="w-24 bg-[#252830] border border-[#3c414d] rounded-md p-1 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {optionsCandle.map((opt) => (
                       <option key={opt} value={opt}>
