@@ -21,7 +21,7 @@ const Broker: React.FC = () => {
   });
 
   const [editing, setEditing] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Start as true for initial load
   const [sessionLoading, setSessionLoading] = useState(false);
 
   useEffect(() => {
@@ -79,7 +79,6 @@ const Broker: React.FC = () => {
     try {
       setSessionLoading(true);
       const res = await axiosInstance.get("/dashboard/broker/generate-session");
-
       setData({ ...data, sessionId: res.data.sessionId });
       toast.success("Session generated");
     } catch (err: any) {
@@ -90,7 +89,7 @@ const Broker: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-gray-900 text-white p-4 rounded-lg shadow border border-gray-800">
+    <div className="w-full max-w-md mx-auto mt-4 bg-gray-900 text-white p-4 rounded-lg shadow border border-gray-800 relative">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-sm font-bold text-blue-400 flex items-center gap-1.5">
@@ -117,83 +116,81 @@ const Broker: React.FC = () => {
         </button>
       </div>
 
-      {/* Loading */}
-      {loading ? (
-        <p className="text-gray-400 text-center text-xs py-4">
-          <FaSpinner className="animate-spin inline-block mr-1" />
-          Loading...
-        </p>
-      ) : (
-        <div className="flex flex-col gap-3">
-          {["brokerId", "mpin", "apiKey", "totpkey"].map((field) => {
-            const labels: any = {
-              brokerId: "Broker ID",
-              mpin: "MPIN",
-              apiKey: "API Key",
-              totpkey: "TOTP Key",
-            };
+      {/* Inputs */}
+      <div className="flex flex-col gap-3 relative">
+        {["brokerId", "mpin", "apiKey", "totpkey"].map((field) => {
+          const labels: any = {
+            brokerId: "Broker ID",
+            mpin: "MPIN",
+            apiKey: "API Key",
+            totpkey: "TOTP Key",
+          };
 
-            return (
-              <div key={field} className="flex flex-col gap-1">
-                <label className="text-xs text-gray-400">{labels[field]}</label>
-                <input
-                  type={
-                    field === "mpin" || field === "totpkey"
-                      ? "password"
-                      : "text"
-                  }
-                  disabled={!editing}
-                  className={`w-full px-2 py-1.5 text-xs rounded-md bg-gray-800 text-gray-200 
-                    ${
-                      editing
-                        ? "border border-blue-500"
-                        : "border border-gray-700"
-                    }`}
-                  value={data[field as keyof BrokerData]}
-                  onChange={(e) =>
-                    handleChange(field as keyof BrokerData, e.target.value)
-                  }
-                />
-              </div>
-            );
-          })}
-
-          {data.sessionId && (
-            <div className="bg-gray-800 p-3 rounded-md border border-blue-500/30 text-xs">
-              <span className="text-blue-400 font-semibold">Session ID:</span>
-              <p className="mt-1 text-gray-300 break-all">{data.sessionId}</p>
+          return (
+            <div key={field} className="flex flex-col gap-1">
+              <label className="text-xs text-gray-400">{labels[field]}</label>
+              <input
+                type={
+                  field === "mpin" || field === "totpkey" ? "password" : "text"
+                }
+                disabled={!editing || loading}
+                className={`w-full px-2 py-1.5 text-xs rounded-md bg-gray-800 text-gray-200 
+                  ${
+                    editing
+                      ? "border border-blue-500"
+                      : "border border-gray-700"
+                  }`}
+                value={data[field as keyof BrokerData]}
+                onChange={(e) =>
+                  handleChange(field as keyof BrokerData, e.target.value)
+                }
+              />
             </div>
-          )}
+          );
+        })}
 
-          {/* Buttons */}
-          <div className="flex gap-2 mt-2  justify-end">
-            {editing ? (
-              <>
-                <button
-                  onClick={handleSave}
-                  className=" w-20 px-3 py-1.5 text-xs cursor-pointer scale-95 bg-blue-600 rounded-md hover:bg-blue-700"
-                >
-                  <FaSave className="inline-block mr-1" /> Save
-                </button>
-
-                <button
-                  onClick={handleCancel}
-                  className=" px-3 py-1.5 w-20 text-xs cursor-pointer scale-95 bg-gray-700 rounded-md hover:bg-gray-600"
-                >
-                  <FaBan className="inline-block mr-1" /> Cancel
-                </button>
-              </>
-            ) : (
-              <button
-                onClick={handleEdit}
-                className="w-20 items-end justify-end cursor-pointer scale-95 px-3 py-1.5 text-xs bg-yellow-600 rounded-md hover:bg-yellow-500 text-black font-semibold"
-              >
-                <FaEdit className="inline-block mr-1" /> Edit
-              </button>
-            )}
+        {data.sessionId && (
+          <div className="bg-gray-800 p-3 rounded-md border border-blue-500/30 text-xs">
+            <span className="text-blue-400 font-semibold">Session ID:</span>
+            <p className="mt-1 text-gray-300 break-all">{data.sessionId}</p>
           </div>
+        )}
+
+        {/* Buttons */}
+        <div className="flex gap-2 mt-2 justify-end">
+          {editing ? (
+            <>
+              <button
+                onClick={handleSave}
+                className="w-20 px-3 py-1.5 text-xs cursor-pointer scale-95 bg-blue-600 rounded-md hover:bg-blue-700"
+              >
+                <FaSave className="inline-block mr-1" /> Save
+              </button>
+
+              <button
+                onClick={handleCancel}
+                className="px-3 py-1.5 w-20 text-xs cursor-pointer scale-95 bg-gray-700 rounded-md hover:bg-gray-600"
+              >
+                <FaBan className="inline-block mr-1" /> Cancel
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={handleEdit}
+              className="w-20 items-end justify-end cursor-pointer scale-95 px-3 py-1.5 text-xs bg-yellow-600 rounded-md hover:bg-yellow-500 text-black font-semibold"
+            >
+              <FaEdit className="inline-block mr-1" /> Edit
+            </button>
+          )}
         </div>
-      )}
+
+        {/* Loading overlay */}
+        {/* {loading && (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center rounded-md">
+            <FaSpinner className="animate-spin text-white text-2xl" />
+          </div>
+        )} */}
+      </div>
     </div>
   );
 };

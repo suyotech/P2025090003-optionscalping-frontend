@@ -54,7 +54,7 @@ const FooterLayout: React.FC<FooterLayoutProps> = ({ positions }) => {
   );
 
   return (
-    <div className="mt-4 bg-[#0d0f12] rounded-xl overflow-hidden border border-[#2b2e35] shadow-lg">
+    <div className="mt-4 min-h-screen bg-[#0d0f12] rounded-xl overflow-hidden border border-[#2b2e35] shadow-lg">
       {/* Tab Navigation and Info Bar */}
       <div className="flex justify-between items-center bg-[#181a1f] border-b border-gray-700 p-1">
         {/* Tabs */}

@@ -104,12 +104,14 @@ const Logs: React.FC = () => {
   };
 
   return (
-    <div className="w-screen h-full flex flex-col  text-white text-xs">
+    <div className="w-screen h-full flex flex-col mt-4 overflow-hidden text-white text-xs">
       {/* Header Controls */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 bg-gray-800 border border-gray-700 shadow-xl rounded-lg p-3 mb-3">
-        <h1 className="text-sm font-bold">📜 System Logs</h1>
+      <div className="flex flex-col md:flex-row justify-between items-center gap-3 bg-gray-800 border border-gray-700 shadow-xl rounded-lg p-3 mb-4">
+        {/* Title */}
+        <h1 className="text-lg font-bold">📜 System Logs</h1>
 
-        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
           {/* Date Input */}
           <input
             type="date"
@@ -118,36 +120,35 @@ const Logs: React.FC = () => {
               setSelectedDate(e.target.value);
               setPage(1);
             }}
-            className="px-2 py-1 rounded-lg border border-gray-600 bg-gray-700 text-white text-xs"
+            className="px-3 py-1 rounded-lg border border-gray-600 bg-gray-700 text-white text-xs"
           />
 
-          {/* Delete Button With Tooltip */}
+          {/* Delete All Button */}
           <div className="relative group">
             <button
               onClick={() => openDeleteConfirm()}
               disabled={logs.length === 0}
-              className="px-3 py-2 bg-red-600 cursor-pointer scale-95 hover:bg-red-700 rounded text-white text-xs flex items-center gap-1"
+              className="px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white text-xs flex items-center gap-1"
             >
               <FaTrash />
+             
             </button>
-
-            <span className="absolute left-3/4 top-full mt-1 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap">
+            <span className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap">
               Delete All Logs
             </span>
           </div>
 
-          {/* Download Button With Tooltip */}
+          {/* Download Button */}
           <div className="relative group">
             <button
               onClick={downloadAllLogsCSV}
               disabled={logs.length === 0}
-              className="px-3 py-2 bg-blue-600 cursor-pointer scale-95 hover:bg-blue-700 rounded text-white text-xs flex items-center gap-1"
+              className="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs flex items-center gap-1"
             >
               <MdDownload />
+              
             </button>
-
-            {/* Tooltip BELOW */}
-            <span className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap">
+            <span className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-black text-white text-[10px] px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap">
               Download CSV
             </span>
           </div>

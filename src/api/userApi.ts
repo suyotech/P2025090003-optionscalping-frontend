@@ -1,7 +1,7 @@
 
 import axiosInstance from "./axiosInstance";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+// const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // ------------- Interfaces ----------------
 // Interfaces
