@@ -27,10 +27,35 @@ import type { IndexConfigItem, StrikeItem, PositionItem } from "../types/index";
 
 // --- MOCK DATA ---
 const mockConfig: IndexConfigItem[] = [
-  { name: "NIFTY", tf: 1, lots: 3, legs: 3, dynamicCandle: 180, fixedCandle: 120 },
-  { name: "BANKN", tf: 1, lots: 3, legs: 3, dynamicCandle: 120, fixedCandle: 300 },
-  { name: "SENSEX", tf: 1, lots: 3, legs: 3, dynamicCandle: 120, fixedCandle: 300 },
+  {
+    name: "NIFTY",
+    tf: 1,
+    lots: 3,
+    legs: 3,
+    dynamicCandle: 180,
+    fixedCandle: 120,
+    fixedCandleEnabled: true,
+  },
+  {
+    name: "BANKN",
+    tf: 1,
+    lots: 3,
+    legs: 3,
+    dynamicCandle: 120,
+    fixedCandle: 300,
+    fixedCandleEnabled: false,
+  },
+  {
+    name: "SENSEX",
+    tf: 1,
+    lots: 3,
+    legs: 3,
+    dynamicCandle: 120,
+    fixedCandle: 300,
+    fixedCandleEnabled: true,
+  },
 ];
+
 
 const mockStrikes: StrikeItem[] = [
   { index: "NIFTY", strikePrice: "₹200+", capitalLots: 50000, lots: 3 },
@@ -84,23 +109,27 @@ export const dashboardApi = {
       setTimeout(() => resolve(), 300);
     }),
 
-  updateConfig: (name: string, key: keyof IndexConfigItem, value: number): Promise<void> =>
+  updateConfig: (
+    name: string,
+    key: keyof IndexConfigItem,
+    value: number | boolean
+  ): Promise<void> =>
     new Promise((resolve) => {
       console.log(`Updating config: ${name}.${key} to ${value}`);
       setTimeout(() => resolve(), 300);
     }),
 };
 
-// src/socket.ts (MOCK)
-export const socket = {
-    on: (event: string, callback: (data: any) => void) => {
-        // Mocking socket behavior for demo purposes
-        console.log(`Socket listening for: ${event}`);
-    },
-    off: (event: string) => {
-        console.log(`Socket unsubscribed from: ${event}`);
-    },
-    emit: (event: string, data: any) => {
-        console.log(`Socket emitted: ${event}`, data);
-    }
-}
+// // src/socket.ts (MOCK)
+// export const socket = {
+//     on: (event: string, callback: (data: any) => void) => {
+//         // Mocking socket behavior for demo purposes
+//         console.log(`Socket listening for: ${event}`);
+//     },
+//     off: (event: string) => {
+//         console.log(`Socket unsubscribed from: ${event}`);
+//     },
+//     emit: (event: string, data: any) => {
+//         console.log(`Socket emitted: ${event}`, data);
+//     }
+// }

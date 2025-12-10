@@ -146,22 +146,21 @@ const DashboardPage: React.FC = () => {
     }
   };
 
-  const handleConfigChange = async (
-    name: string,
-    key: keyof IndexConfigItem,
-    value: number
-  ) => {
-    // Optimistic Update
-    setConfig((prev) =>
-      prev.map((it) => (it.name === name ? { ...it, [key]: value } : it))
-    );
+const handleConfigChange = async (
+  name: string,
+  key: keyof IndexConfigItem,
+  value: number | boolean
+) => {
+  setConfig((prev) =>
+    prev.map((it) => (it.name === name ? { ...it, [key]: value } : it))
+  );
 
-    try {
-      await dashboardApi.updateConfig(name, key, value);
-    } catch (err) {
-      console.error("Config persistence failed", err);
-    }
-  };
+  try {
+    await dashboardApi.updateConfig(name, key, value);
+  } catch (err) {
+    console.error("Config persistence failed", err);
+  }
+};
 
   const handleAction = async (button: string, index?: string) => {
     try {
