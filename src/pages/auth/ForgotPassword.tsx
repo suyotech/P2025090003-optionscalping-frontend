@@ -70,16 +70,14 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center p-6">
-      {/* HEADER */}
-      <div className="absolute top-6 text-center">
-        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300 drop-shadow">
-          Scalping Strategy
-        </h1>
-      </div>
-
+     
       {/* CARD */}
       <div className="w-full max-w-md bg-gray-900/70 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-gray-800">
-        <h2 className="text-2xl font-semibold text-center mb-8 text-gray-100">
+        <h1 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300 drop-shadow">
+          Scalping Strategy
+        </h1>
+
+        <h2 className="text-2xl font-semibold text-center m-8 text-gray-100">
           {step === 1 ? "Forgot Password" : "Reset Password"}
         </h2>
 

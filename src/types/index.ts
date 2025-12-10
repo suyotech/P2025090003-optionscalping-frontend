@@ -1,5 +1,3 @@
-// src/types/index.ts
-
 export interface User {
   id: string;
   email: string;
@@ -14,28 +12,31 @@ export interface AuthResponse {
 }
 
 export interface IndexConfigItem {
-  name: string;
-  tf: number;
+  name: "NIFTY" | "BANKN" | "SENSEX";
+  tf: number; // Time Frame
   lots: number;
   legs: number;
-  dynamic_candle: number;
-  fixed_candle: number;
+  dynamicCandle: number;
+  fixedCandle: number;
 }
 
 export interface StrikeItem {
-  index: string;
-  strike: string;
-  capital: number;
+  index: "NIFTY" | "BANKN" | "SENSEX";
+  strikePrice: string; // e.g., "₹200+"
+  capitalLots: number;
   lots: number;
 }
 
 export interface PositionItem {
   symbol: string;
   target: number;
-  sl: number;
-  executed_price?: number;
-  live_ltp?: number;
-  mtm?: number;
-  cap_req?: number;
-  status: string;
+  sl: number; // Stop Loss
+  high: number;
+  low: number;
+  slPosition: number;
+  executedPrice: number;
+  liveLTP: number;
+  mtm: number;
+  capReq: number; // Capital Required
+  status: "ACTIVE" | "EXITED";
 }
