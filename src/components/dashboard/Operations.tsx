@@ -1,63 +1,5 @@
-// import React from "react";
-
-// interface Props {
-//   onAction: (button: string, index?: string) => Promise<void>;
-// }
-
-// const Operations: React.FC<Props> = ({ onAction }) => {
-//   const groups = ["NIFTY", "BANKN", "SENSEX"];
-//   return (
-//     <div className="space-y-4 bg-[#15181d] p-4 rounded-lg shadow-md">
-//       <h2 className="text-sm font-semibold mb-3">OPERATIONS</h2>
-
-//       {groups.map((g) => (
-//         <div key={g}>
-//           <h3 className="text-xs mb-1">{g}</h3>
-//           <div className="grid grid-cols-6 gap-2 text-xs">
-//             {["NCP", "NC", "NP", "BC", "EXIT NC", "EXIT NP"].map((btn) => (
-//               <button
-//                 key={btn}
-//                 onClick={() => onAction(btn, g)}
-//                 className={`py-2 rounded ${
-//                   btn === "EXIT" ? "bg-red-600" : "bg-blue-600"
-//                 }`}
-//               >
-//                 {btn}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-//       ))}
-
-//       <div className="grid grid-cols-2 gap-2 mt-4 text-xs">
-//         <button
-//           onClick={() => onAction("EXIT_CALL")}
-//           className="bg-red-600 py-2 rounded"
-//         >
-//           EXIT CALL
-//         </button>
-//         <button
-//           onClick={() => onAction("CLOSE_ALL")}
-//           className="bg-red-600 py-2 rounded"
-//         >
-//           CLOSE ALL POSITIONS
-//         </button>
-//         <button
-//           onClick={() => onAction("CANCEL_ALL")}
-//           className="bg-red-600 py-2 rounded col-span-2"
-//         >
-//           CANCEL ALL ORDERS
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Operations;
-
 
 import React from "react";
-import { Zap } from "lucide-react";
 
 // Define the interface for the component props
 interface OperationsProps {
@@ -129,15 +71,12 @@ const Operations: React.FC<OperationsProps> = ({ onAction }) => {
   return (
     // Styling matches the dark, rounded panel from the dashboard design
     <div className="space-y-4 bg-[#15181d] text-gray-100 p-4 rounded-xl shadow-2xl w-full max-w-lg mx-auto border border-gray-700">
-      <h2 className="text-lg font-bold text-white tracking-widest border-b border-gray-700 pb-2 mb-4">
-        <Zap className="inline w-5 h-5 mr-2 text-yellow-400" />
-        OPERATIONS
-      </h2>
+      <h2 className="text-sm font-semibold text-gray-400 mb-3">OPERATIONS</h2>
 
       {/* --- Index-Specific Operations (3 Rows of 6 buttons) --- */}
-      <div className="space-y-5">
+      <div className="space-y-3">
         {groups.map((g) => (
-          <div key={g} className="flex items-center gap-4">
+          <div key={g} className="flex items-center gap-2">
             {/* Index Label (NIFTY, BANKN, SENSEX) */}
             <h3 className="text-sm font-semibold w-20 text-center flex-shrink-0 text-white p-2 bg-gray-700 rounded-md shadow-inner">
               {g}
@@ -173,7 +112,7 @@ const Operations: React.FC<OperationsProps> = ({ onAction }) => {
             key={item.action}
             // Global actions do not require the index parameter
             onClick={() => onAction(item.action)}
-            className={`py-3 rounded-lg transition duration-200 shadow-md ${item.color} transform hover:scale-[1.02]`}
+            className={`py-1 rounded-lg transition duration-200 shadow-md ${item.color} transform hover:scale-[1.02]`}
           >
             {item.label}
           </button>
@@ -184,3 +123,86 @@ const Operations: React.FC<OperationsProps> = ({ onAction }) => {
 };
 
 export default Operations;
+
+// src/components/dashboard/Operations.tsx
+
+// import React from "react";
+// import { FaSyncAlt } from "react-icons/fa";
+
+// interface OperationsProps {
+//   onAction: (button: string, index?: string) => void;
+// }
+
+// const actionButtons = [
+//   // Top Row (NIFTY/BANKN/SENSEX Actions)
+//   { label: "NIFTY", key: "NIFTY", color: "bg-blue-600" },
+//   { label: "NCP", key: "NCP", color: "bg-blue-600" },
+//   { label: "NC", key: "NC", color: "bg-blue-600" },
+//   { label: "NP", key: "NP", color: "bg-blue-600" },
+//   { label: "EXIT NC", key: "EXIT_NC", color: "bg-red-600" },
+//   { label: "EXIT NP", key: "EXIT_NP", color: "bg-red-600" },
+  
+//   { label: "BANKN", key: "BANKN", color: "bg-blue-600" },
+//   { label: "BCP", key: "BCP", color: "bg-blue-600" },
+//   { label: "BC", key: "BC", color: "bg-blue-600" },
+//   { label: "BP", key: "BP", color: "bg-blue-600" },
+//   { label: "EXIT BC", key: "EXIT_BC", color: "bg-red-600" },
+//   { label: "EXIT BP", key: "EXIT_BP", color: "bg-red-600" },
+
+//   { label: "SENSEX", key: "SENSEX", color: "bg-blue-600" },
+//   { label: "SCP", key: "SCP", color: "bg-blue-600" },
+//   { label: "SC", key: "SC", color: "bg-blue-600" },
+//   { label: "SP", key: "SP", color: "bg-blue-600" },
+//   { label: "EXIT SC", key: "EXIT_SC", color: "bg-red-600" },
+//   { label: "EXIT SP", key: "EXIT_SP", color: "bg-red-600" },
+// ];
+
+// const mainButtons = [
+//   { label: "EXIT CALL", key: "EXIT_CALL", color: "bg-red-700" },
+//   { label: "CLOSE ALL POSITIONS", key: "CLOSE_ALL", color: "bg-red-700" },
+//   { label: "EXIT PUT", key: "EXIT_PUT", color: "bg-red-700" },
+
+//   { label: "RSL CALL", key: "RSL_CALL", color: "bg-red-700" },
+//   { label: "CANCEL ALL ORDERS", key: "CANCEL_ALL", color: "bg-red-700" },
+//   { label: "RSL PUT", key: "RSL_PUT", color: "bg-red-700" },
+// ];
+
+// const Operations: React.FC<OperationsProps> = ({ onAction }) => {
+//   const getGridItems = (items: typeof actionButtons) => {
+//     return items.map((btn) => (
+//       <button
+//         key={btn.key}
+//         onClick={() => onAction(btn.key)}
+//         className={`${btn.color} text-white font-medium text-xs py-2 px-1 rounded transition hover:opacity-80`}
+//       >
+//         {btn.label}
+//       </button>
+//     ));
+//   };
+
+//   return (
+//     <div className="bg-[#181a1f] p-4 rounded-xl shadow-lg border border-[#2b2e35]">
+//       <h2 className="text-sm font-semibold text-gray-400 mb-3">OPERATIONS</h2>
+      
+//       {/* Index Specific Buttons (6 columns) */}
+//       <div className="grid grid-cols-6 gap-2 mb-4">
+//         {getGridItems(actionButtons)}
+//       </div>
+
+//       {/* Main Action Buttons (3 columns) */}
+//       <div className="grid grid-cols-3 gap-2">
+//         {mainButtons.map((btn) => (
+//             <button
+//                 key={btn.key}
+//                 onClick={() => onAction(btn.key)}
+//                 className={`${btn.color} text-white font-medium text-xs py-3 rounded transition hover:opacity-80`}
+//             >
+//                 {btn.label}
+//             </button>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Operations;
