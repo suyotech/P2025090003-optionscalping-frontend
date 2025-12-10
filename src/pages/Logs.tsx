@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 import toast from "react-hot-toast";
@@ -9,7 +8,6 @@ interface Log {
   ts: string;
   level: string;
   message: string;
- 
 }
 
 const Logs: React.FC = () => {
@@ -89,9 +87,7 @@ const Logs: React.FC = () => {
       headers.join(","),
       ...logs.map(
         (log) =>
-          `"${log.ts}","${log.level}","${log.message.replace(/"/g, "")}","${
-            log.argument || "-"
-          }"`
+          `"${log.ts}","${log.level}","${log.message.replace(/"/g, "")}"`
       ),
     ];
 
@@ -201,7 +197,6 @@ const Logs: React.FC = () => {
                   </td>
 
                   <td className="py-1 px-2">{log.message}</td>
-                
                 </tr>
               ))
             ) : (
