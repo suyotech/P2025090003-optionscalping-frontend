@@ -50,7 +50,7 @@ console.log("token", accessToken, refreshToken);
     <div className="min-h-screen bg-gray-950 flex items-center justify-center p-6">
       <div className="w-full max-w-md h-150 bg-gray-900/70 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-gray-800">
         <h1 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300 drop-shadow">
-          Scalping Strategy
+         Options Scalping 
         </h1>
 
         <h2 className="text-2xl font-semibold text-center m-8 text-gray-100">

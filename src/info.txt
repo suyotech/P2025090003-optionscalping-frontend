@@ -1,0 +1,17 @@
+add toggle in dynamic candle and fixed candle in index configuration 
+dynamic mde aapn je taknar te store zale phije
+
+
+strick selection
+strick cha box chnage krta ala phijel default 0
+capital lots mde and lots mde toggle and this 2 are also modified
+
+opearions
+buttons la add scale-95
+
+
+positions
+running positions , closed postions, B positions, orderbook , tradebook and funds
+
+
+add history page in header  in this select date

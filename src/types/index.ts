@@ -18,7 +18,9 @@ export interface IndexConfigItem {
   legs: number;
   dynamicCandle: number;
   fixedCandle: number;
-  fixedCandleEnabled: boolean; 
+  fixedCandleEnabled: boolean;
+  dynamicEnabled: boolean;
+  customCandleOptions:boolean;
 }
 
 

@@ -35,6 +35,8 @@ const mockConfig: IndexConfigItem[] = [
     dynamicCandle: 180,
     fixedCandle: 120,
     fixedCandleEnabled: true,
+    dynamicEnabled: false, 
+    customCandleOptions: true, 
   },
   {
     name: "BANKN",
@@ -44,6 +46,8 @@ const mockConfig: IndexConfigItem[] = [
     dynamicCandle: 120,
     fixedCandle: 300,
     fixedCandleEnabled: false,
+    dynamicEnabled: true,
+    customCandleOptions: true, 
   },
   {
     name: "SENSEX",
@@ -53,6 +57,8 @@ const mockConfig: IndexConfigItem[] = [
     dynamicCandle: 120,
     fixedCandle: 300,
     fixedCandleEnabled: true,
+    dynamicEnabled: true, 
+    customCandleOptions: true, 
   },
 ];
 

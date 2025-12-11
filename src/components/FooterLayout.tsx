@@ -5,6 +5,8 @@ import Tradebook from "../pages/Footerlayout/Tradebook";
 import Funds from "../pages/Footerlayout/Funds";
 import { FaSyncAlt } from "react-icons/fa";
 import type { PositionItem } from "../types/index";
+import ClosedPosition from "../pages/Footerlayout/ClosedPosition";
+import Bpositions from "../pages/Footerlayout/Bpositions";
 
 // Define the props for FooterLayout
 interface FooterLayoutProps {
@@ -13,7 +15,12 @@ interface FooterLayoutProps {
 }
 
 // Define the tab keys
-type TabKey = "POSITIONS" | "ORDER BOOK" | "TRADE BOOK" | "FUNDS";
+type TabKey =
+  | "POSITIONS"
+  | "ORDER BOOK"
+  | "TRADE BOOK"
+  | "FUNDS"
+  | "B POSITIONS" | "CLOSED POSITIONS";
 
 // Mock data for MTM/Loss display (replace with actual props/state if available)
 const MOCK_MTM = 2500;
@@ -34,6 +41,10 @@ const FooterLayout: React.FC<FooterLayoutProps> = ({ positions }) => {
         return <Tradebook />;
       case "FUNDS":
         return <Funds />;
+      case "CLOSED POSITIONS":
+        return <ClosedPosition />;
+      case "B POSITIONS":
+        return <Bpositions />;
       default:
         return null;
     }
@@ -54,7 +65,7 @@ const FooterLayout: React.FC<FooterLayoutProps> = ({ positions }) => {
   );
 
   return (
-    <div className="mt-4 min-h-screen bg-[#0d0f12] rounded-xl overflow-hidden border border-[#2b2e35] shadow-lg">
+    <div className="mt-4 min-h-screen  bg-[#0d0f12]  rounded-xl overflow-auto border border-[#2b2e35] shadow-lg">
       {/* Tab Navigation and Info Bar */}
       <div className="flex justify-between items-center bg-[#181a1f] border-b border-gray-700 p-1">
         {/* Tabs */}
@@ -63,6 +74,8 @@ const FooterLayout: React.FC<FooterLayoutProps> = ({ positions }) => {
           <TabButton tab="ORDER BOOK" />
           <TabButton tab="TRADE BOOK" />
           <TabButton tab="FUNDS" />
+          <TabButton tab="CLOSED POSITIONS" />
+          <TabButton tab="B POSITIONS" />
         </div>
 
         {/* Action and Info Section */}
@@ -92,7 +105,7 @@ const FooterLayout: React.FC<FooterLayoutProps> = ({ positions }) => {
       </div>
 
       {/* Content Area */}
-      <div className="w-full">{renderContent}</div>
+      <div className="w-full ">{renderContent}</div>
     </div>
   );
 };
